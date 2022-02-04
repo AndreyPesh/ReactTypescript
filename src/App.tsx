@@ -1,40 +1,49 @@
-import React, { useEffect } from 'react';
-import image from './assets/images/Mona.jpg';
+import React, { useRef, useState } from 'react';
+import { Navbar } from './components/Navbar';
 
-const styles: React.CSSProperties = {
-  width: '18rem',
-};
+export const App: React.FC = () => {
+  const [title, setTitle] = useState('');
+  const [list, setList] = useState([]);
+  const ref = useRef<HTMLInputElement>(null);
 
-const Component = (props: TypeProps) => {
+  const onChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setTitle(event.target.value);
+    console.log(title);
+  };
+
+  const onKeyPress = (event: React.KeyboardEvent) => {
+    if (event.key === 'Enter') {
+      console.log(ref.current?.value);
+      setTitle('');
+    }
+  };
+
+  const addHandler = (title: string) => {
+    console.log('title ', title);
+    
+  }
+
   return (
-    <div>
-      {props.name}
-      <div className="card" style={styles}>
-        <img src={image} className="card-img-top" alt="..." />
-        <div className="card-body">
-          <p className="card-title">Card title</p>
-          <p className="card-text">
-            Some quick example text to build on the card title and make up the bulk of the cards content.
-          </p>
-          <a href="#" className="btn btn-primary">
-            Go somewhere
-          </a>
-        </div>
+    <>
+      <Navbar onAdd={addHandler}/>
+      <div>
+        dfgdfg
+        <input value={title} ref={ref} type='text' id='title' onChange={onChangeHandler} onKeyPress={onKeyPress} />
       </div>
-    </div>
+    </>
   );
 };
 
-export const App = () => {
-  useEffect(() => {});
-  return (
-    <div>
-      <img src={image} />
-      <button className="btn btn-primary">Primary</button>
-    </div>
-  );
-};
+// const createUser = async () => {
+//   const rawResponse = await fetch('https://a-c-rslang.herokuapp.com/words', {
+//     method: 'GET',
+//     headers: {
+//       'Accept': 'application/json',
+//       'Content-Type': 'application/json'
+//     },
+//     // body: JSON.stringify(user)
+//   });
+//   const content = await rawResponse.json();
 
-type TypeProps = {
-  name: string;
-};
+//   console.log(content);
+// };
