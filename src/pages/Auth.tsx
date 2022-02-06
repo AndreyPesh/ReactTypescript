@@ -1,26 +1,19 @@
 import React, { useState } from 'react';
+import Authorization from '../components/Authorization';
+import Registration from '../components/Registration';
+import { TypeForm } from '../utils/enum/enum';
 
 const Auth: React.FC = () => {
-  const [mode, setMode] = useState('form1');
+  const [mode, setMode] = useState(TypeForm.Authorization);
 
-  const handlerSelectForm = (formName: string) => {
-    setMode(formName);
-  }
+  const handlerSelectForm = (formType: TypeForm) => {
+    setMode(formType);
+  };
 
-  const activeForm = mode === 'form1' ? <h2>form1</h2> : <h2>form2</h2>;
-  const firstButtonClass = mode === 'form1' ? 'btn btn-primary' : 'btn btn-secondary';
-  const secondButtonClass = mode === 'form2' ? 'btn btn-primary' : 'btn btn-secondary';
-  return (
-    <>
-      <div>
-        <button className={firstButtonClass} onClick={handlerSelectForm.bind(null, 'form1')}>Войти</button>
-        <button className={secondButtonClass} onClick={handlerSelectForm.bind(null, 'form2')}>Зарегистрироваться</button>
-      </div>
-      <div>
-        {activeForm}
-      </div>
-    </>
-  );
+  const activeForm =
+    mode === TypeForm.Authorization ? <Authorization onSelectForm={handlerSelectForm} /> : <Registration onSelectForm={handlerSelectForm} />;
+
+  return <>{activeForm}</>;
 };
 
 export default Auth;
