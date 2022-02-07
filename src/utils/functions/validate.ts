@@ -22,9 +22,9 @@ const checkPassword = (password: string, errors: ErrorsForm): ErrorsForm => {
   return errors;
 };
 
-const comparePassword = (password: string, passwordConfirm: string, errors: ErrorsForm): ErrorsForm => {
-  if (password !== passwordConfirm) {
-    errors.passwordConfirm = MessageErrorFormField.comparePassword;
+const checkNameUser = (name: string, errors: ErrorsForm): ErrorsForm => {
+  if (name.length < 3) {
+    errors.name = MessageErrorFormField.nameUser;
   }
   return errors;
 };
@@ -39,6 +39,6 @@ export const validateRegistration = (values: ValuesRegistration) => {
   return {
     ...checkEmail(values.email, errors),
     ...checkPassword(values.password, errors),
-    ...comparePassword(values.password, values.passwordConfirm, errors),
+    ...checkNameUser(values.name, errors),
   };
 };

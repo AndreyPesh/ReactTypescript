@@ -5,25 +5,29 @@ import { useFormik } from 'formik';
 import { ValuesRegistration } from '../utils/interfaces/interfaces';
 import Button from './Button';
 import { validateRegistration } from '../utils/functions/validate';
+import { useDispatch } from 'react-redux';
+import { asyncCreateUser } from '../redux/actions/usersCreator';
 
 const Registration: React.FC<{ onSelectForm: HandlerSelectForm }> = (props) => {
   const [stateButton, setStateButton] = useState(false);
+  const dispatch = useDispatch();
+
+  const handlerForm = () => {
+    dispatch(asyncCreateUser(setStateButton));
+  }
+
   const formik = useFormik({
     initialValues: {
       email: '',
       password: '',
-      passwordConfirm: '',
+      name: '',
     },
-    validate: validateRegistration,
+    // validate: validateRegistration,
     onSubmit: (values: ValuesRegistration) => {
-      setStateButton(true);
-      setTimeout(() => {
-        setStateButton(false);
-        const { email, password, passwordConfirm } = values;
-        console.log(email, password, passwordConfirm);
-      }, 3000);
+      handlerForm();
     },
   });
+
   const handlerSelectRegistration = (event: MouseEvent<HTMLAnchorElement>): void => {
     event.preventDefault();
     props.onSelectForm(TypeForm.Authorization);
@@ -32,6 +36,21 @@ const Registration: React.FC<{ onSelectForm: HandlerSelectForm }> = (props) => {
   return (
     <div className='form-registration-wrap'>
       <form onSubmit={formik.handleSubmit} noValidate>
+      <div className='form-group'>
+          <label htmlFor='name-user'>Ваше имя</label>
+          <input
+            type='name'
+            name='name'
+            className='form-control'
+            id='name-user'
+            placeholder='Имя'
+            autoComplete='on'
+            onChange={formik.handleChange}
+            value={formik.values.name}
+            onBlur={formik.handleBlur}
+          />
+          {formik.touched.name && formik.errors.name ? <div className='form-error'>{formik.errors.name}</div> : ''}
+        </div>
         <div className='form-group'>
           <label htmlFor='email-registration'>Логин</label>
           <input
@@ -60,21 +79,6 @@ const Registration: React.FC<{ onSelectForm: HandlerSelectForm }> = (props) => {
             onBlur={formik.handleBlur}
           />
           {formik.touched.password && formik.errors.password ? <div className='form-error'>{formik.errors.password}</div> : ''}
-        </div>
-        <div className='form-group'>
-          <label htmlFor='password-reg2'>Подтвердить пароль</label>
-          <input
-            type='password'
-            name='passwordConfirm'
-            className='form-control'
-            id='password-reg2'
-            placeholder='Подтвердите пароль'
-            autoComplete='on'
-            onChange={formik.handleChange}
-            value={formik.values.passwordConfirm}
-            onBlur={formik.handleBlur}
-          />
-          {formik.touched.passwordConfirm && formik.errors.passwordConfirm ? <div className='form-error'>{formik.errors.passwordConfirm}</div> : ''}
         </div>
         <div className='form-buttons'>
           <Button name='Регистрация' className='btn btn-dark' type='submit' disabled={stateButton}/>

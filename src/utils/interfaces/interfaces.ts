@@ -6,11 +6,11 @@ export interface ValuesAuth {
 export interface ValuesRegistration  {
   email: string;
   password: string;
-  passwordConfirm: string;
+  name: string;
 }
 
 export interface ErrorsForm {
   email?: string;
   password?: string;
-  passwordConfirm?: string;
+  name?: string;
 }
