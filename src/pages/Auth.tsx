@@ -4,7 +4,7 @@ import Registration from '../components/Registration';
 import { TypeForm } from '../utils/enum/enum';
 
 const Auth: React.FC = () => {
-  const [mode, setMode] = useState(TypeForm.Authorization);
+  const [mode, setMode] = useState(TypeForm.Registration);
 
   const handlerSelectForm = (formType: TypeForm) => {
     setMode(formType);

@@ -3,7 +3,14 @@ export interface ValuesAuth {
   password: string;
 }
 
-export interface ErrorsAuth {
+export interface ValuesRegistration  {
   email: string;
   password: string;
+  passwordConfirm: string;
+}
+
+export interface ErrorsForm {
+  email?: string;
+  password?: string;
+  passwordConfirm?: string;
 }

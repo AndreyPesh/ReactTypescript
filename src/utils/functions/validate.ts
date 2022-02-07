@@ -1,20 +1,44 @@
 import { REG_EXP_EMAIL } from '../constants/constants';
 import { MessageErrorFormField } from '../enum/enum';
-import { ErrorsAuth, ValuesAuth } from '../interfaces/interfaces';
+import { ErrorsForm, ValuesAuth, ValuesRegistration } from '../interfaces/interfaces';
 
-export const validateAuthorization = (values: ValuesAuth) => {
-  const errors: Partial<ErrorsAuth> = {};
-  if (!values.email) {
+const checkEmail = (email: string, errors: ErrorsForm): ErrorsForm => {
+  if (!email) {
     errors.email = MessageErrorFormField.emptyField;
-  } else if (values.email.length < 5) {
+  } else if (email.length < 5) {
     errors.email = MessageErrorFormField.fewLength;
-  } else if (!REG_EXP_EMAIL.test(values.email)) {
+  } else if (!REG_EXP_EMAIL.test(email)) {
     errors.email = MessageErrorFormField.incorrectEmail;
   }
-  if (!values.password) {
+  return errors;
+};
+
+const checkPassword = (password: string, errors: ErrorsForm): ErrorsForm => {
+  if (!password) {
     errors.password = MessageErrorFormField.emptyField;
-  } else if (values.password.length < 5) {
+  } else if (password.length < 5) {
     errors.password = MessageErrorFormField.fewLength;
   }
   return errors;
+};
+
+const comparePassword = (password: string, passwordConfirm: string, errors: ErrorsForm): ErrorsForm => {
+  if (password !== passwordConfirm) {
+    errors.passwordConfirm = MessageErrorFormField.comparePassword;
+  }
+  return errors;
+};
+
+export const validateAuthorization = (values: ValuesAuth) => {
+  const errors: ErrorsForm = {};
+  return { ...checkEmail(values.email, errors), ...checkPassword(values.password, errors) };
+};
+
+export const validateRegistration = (values: ValuesRegistration) => {
+  const errors: ErrorsForm = {};
+  return {
+    ...checkEmail(values.email, errors),
+    ...checkPassword(values.password, errors),
+    ...comparePassword(values.password, values.passwordConfirm, errors),
+  };
 };

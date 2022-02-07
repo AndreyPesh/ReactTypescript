@@ -53,6 +53,7 @@ const Authorization: React.FC<{ onSelectForm: HandlerSelectForm }> = (props) => 
             name='password'
             className='form-control'
             id='password-auth'
+            autoComplete='on'
             placeholder='Введите пароль'
             value = {formik.values.password}
             onChange = {formik.handleChange}
