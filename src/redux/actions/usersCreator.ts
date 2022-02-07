@@ -18,7 +18,6 @@ export function asyncCreateUser(controlButton: (state: boolean) => void, values:
         data: values,
         headers:  BASE_HEADERS
       });
-      console.log(response);
       if (response.status === STATUS_200) {
         dispatch(asyncSignInUser({email: values.email, password: values.password}));
       }
@@ -40,7 +39,6 @@ export function asyncSignInUser(values: ValuesAuth, controlButton?: (state: bool
         data: values,
         headers:  BASE_HEADERS
       });
-      console.log('sign ', response);
       if(response.status === STATUS_200) {
         dispatch(setDataUser(response.data));
         setLocalStorage(response.data);

@@ -31,7 +31,7 @@ const Registration: React.FC<{ onSelectForm: HandlerSelectForm }> = (props) => {
       password: '',
       name: '',
     },
-    // validate: validateRegistration,
+    validate: validateRegistration,
     onSubmit: (values: ValuesRegistration) => {
       dispatch(asyncCreateUser(setStateButton, values));
     },
