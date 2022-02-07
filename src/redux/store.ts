@@ -2,11 +2,9 @@ import { combineReducers, createStore, applyMiddleware } from 'redux';
 
 import { composeWithDevTools } from 'redux-devtools-extension';
 import usersReducer from './reducers/usersReducer';
-import statusUsersReducer from './reducers/statusUserReducer';
 import thunk from 'redux-thunk';
 
 const rootReducer = combineReducers({
-  userStatus: statusUsersReducer,
   userData: usersReducer,
 });
 

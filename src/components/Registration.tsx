@@ -9,20 +9,21 @@ import { validateRegistration } from '../utils/functions/validate';
 import { useDispatch, useSelector } from 'react-redux';
 import { asyncCreateUser } from '../redux/actions/usersCreator';
 import { RootState } from '../redux/store';
+import { MESSAGE_IS_AUTH } from '../utils/constants/constants';
 
 const Registration: React.FC<{ onSelectForm: HandlerSelectForm }> = (props) => {
   const {
-    userStatus: { isAuth },
+    userData: { message },
   } = useSelector((state: RootState) => state);
   const [stateButton, setStateButton] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (isAuth) {
+    if (message === MESSAGE_IS_AUTH) {
       navigate('/');
     }
-  }, [isAuth]);
+  }, [message]);
 
   const formik = useFormik({
     initialValues: {
@@ -32,7 +33,7 @@ const Registration: React.FC<{ onSelectForm: HandlerSelectForm }> = (props) => {
     },
     // validate: validateRegistration,
     onSubmit: (values: ValuesRegistration) => {
-      dispatch(asyncCreateUser(setStateButton));
+      dispatch(asyncCreateUser(setStateButton, values));
     },
   });
 

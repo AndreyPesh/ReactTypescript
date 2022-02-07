@@ -1,9 +1,12 @@
+import { getCurrentUserState } from '../../utils/functions/localStorage';
 import { TypeActionCreateUser } from '../types/types';
-import { CREATE_USER, DEFAULT_STATUS_USER_DATA } from '../constants';
+import { SET_DATA_USER } from '../constants';
 
-export default function usersReducer(state = DEFAULT_STATUS_USER_DATA, action: TypeActionCreateUser) {
+
+
+export default function usersReducer(state = getCurrentUserState(), action: TypeActionCreateUser) {
   switch (action.type) {
-    case CREATE_USER:
+    case SET_DATA_USER:
       return { ...state, ...action.payload };
     default:
       return state;

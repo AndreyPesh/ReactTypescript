@@ -1,9 +1,4 @@
-import { CREATE_USER, SET_STATUS_USER } from '../constants';
-import { StatusUser, UserData } from './interfaces';
+import { SET_DATA_USER } from '../constants';
+import { UserData } from './interfaces';
 
-export type TypeActionCreateUser = { type: typeof CREATE_USER; payload: UserData };
-
-export type TypeStatusUser = {
-  type: typeof SET_STATUS_USER;
-  payload: StatusUser;
-};
+export type TypeActionCreateUser = { type: typeof SET_DATA_USER; payload: UserData };

@@ -5,8 +5,3 @@ export interface UserData {
   userId: string;
   name: string;
 }
-
-export interface StatusUser {
-  name: string;
-  isAuth: boolean;
-}

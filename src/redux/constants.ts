@@ -1,13 +1,7 @@
-export const DEFAULT_STATUS_USER = {
-  name: 'Guest',
-  isAuth: false,
+export const BASE_URL = 'https://a-c-rslang.herokuapp.com';
+export const BASE_HEADERS = {
+  'Accept': 'application/json',
+  'Content-Type': 'application/json'
 };
-export const DEFAULT_STATUS_USER_DATA = {
-  message: '',
-  token: '',
-  refreshToken: '',
-  userId: '',
-  name: '',
-};
-export const CREATE_USER = 'CREATE_USER';
-export const SET_STATUS_USER = 'SET_STATUS_USER';
+export const SET_DATA_USER = 'SET_DATA_USER';
+export const STATUS_200 = 200;

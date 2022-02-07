@@ -16,7 +16,7 @@ const checkEmail = (email: string, errors: ErrorsForm): ErrorsForm => {
 const checkPassword = (password: string, errors: ErrorsForm): ErrorsForm => {
   if (!password) {
     errors.password = MessageErrorFormField.emptyField;
-  } else if (password.length < 5) {
+  } else if (password.length < 8) {
     errors.password = MessageErrorFormField.fewLength;
   }
   return errors;

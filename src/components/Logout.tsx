@@ -1,14 +1,15 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { setStatusUser } from '../redux/actions/usersCreator';
-import { DEFAULT_STATUS_USER } from '../redux/constants';
+import { setDataUser } from '../redux/actions/usersCreator';
+import { DEFAULT_STATUS_USER_DATA, resetStorage } from '../utils/functions/localStorage';
 
 const Logout = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const handlerLogout = () => {
-    dispatch(setStatusUser(DEFAULT_STATUS_USER));
+    dispatch(setDataUser(DEFAULT_STATUS_USER_DATA));
+    resetStorage();
     navigate('/');
   };
 
