@@ -28,6 +28,7 @@
     "react-redux": "^7.2.6",
     "react-router-dom": "^6.2.1",
     "redux": "^4.1.2",
+    "redux-devtools-extension": "^2.13.9",
     "redux-thunk": "^2.4.1"
   },
   "devDependencies": {
@@ -55,7 +56,6 @@
     "html-webpack-plugin": "^5.5.0",
     "mini-css-extract-plugin": "^2.5.3",
     "prettier": "^2.5.1",
-    "redux-devtools-extension": "^2.13.9",
     "sass": "^1.49.7",
     "sass-loader": "^12.4.0",
     "style-loader": "^3.3.1",

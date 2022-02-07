@@ -26,16 +26,16 @@ const getLocalStorage = (): UserData => {
 };
 
 export const getCurrentUserState = () => {
-  if(isStorageNotExist()) {
+  if (isStorageNotExist()) {
     setLocalStorage(DEFAULT_STATUS_USER_DATA);
   }
   return getLocalStorage();
-}
+};
 
 export const resetStorage = () => {
-  if(!isStorageNotExist()) {
+  if (!isStorageNotExist()) {
     setLocalStorage(DEFAULT_STATUS_USER_DATA);
   } else {
     throw new Error('Cant reset local storage');
   }
-}
+};
