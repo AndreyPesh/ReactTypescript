@@ -3,7 +3,7 @@ export interface ValuesAuth {
   password: string;
 }
 
-export interface ValuesRegistration  {
+export interface ValuesRegistration {
   email: string;
   password: string;
   name: string;

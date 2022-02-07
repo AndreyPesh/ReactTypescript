@@ -1,20 +1,28 @@
-import React, { MouseEvent, useState } from 'react';
+import React, { MouseEvent, useEffect, useState } from 'react';
 import { TypeForm } from '../utils/enum/enum';
 import { HandlerSelectForm } from '../utils/types/types';
 import { useFormik } from 'formik';
+import { useNavigate } from 'react-router-dom';
 import { ValuesRegistration } from '../utils/interfaces/interfaces';
 import Button from './Button';
 import { validateRegistration } from '../utils/functions/validate';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { asyncCreateUser } from '../redux/actions/usersCreator';
+import { RootState } from '../redux/store';
 
 const Registration: React.FC<{ onSelectForm: HandlerSelectForm }> = (props) => {
+  const {
+    userStatus: { isAuth },
+  } = useSelector((state: RootState) => state);
   const [stateButton, setStateButton] = useState(false);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
-  const handlerForm = () => {
-    dispatch(asyncCreateUser(setStateButton));
-  }
+  useEffect(() => {
+    if (isAuth) {
+      navigate('/');
+    }
+  }, [isAuth]);
 
   const formik = useFormik({
     initialValues: {
@@ -24,7 +32,7 @@ const Registration: React.FC<{ onSelectForm: HandlerSelectForm }> = (props) => {
     },
     // validate: validateRegistration,
     onSubmit: (values: ValuesRegistration) => {
-      handlerForm();
+      dispatch(asyncCreateUser(setStateButton));
     },
   });
 
@@ -36,7 +44,7 @@ const Registration: React.FC<{ onSelectForm: HandlerSelectForm }> = (props) => {
   return (
     <div className='form-registration-wrap'>
       <form onSubmit={formik.handleSubmit} noValidate>
-      <div className='form-group'>
+        <div className='form-group'>
           <label htmlFor='name-user'>Ваше имя</label>
           <input
             type='name'
@@ -78,10 +86,14 @@ const Registration: React.FC<{ onSelectForm: HandlerSelectForm }> = (props) => {
             value={formik.values.password}
             onBlur={formik.handleBlur}
           />
-          {formik.touched.password && formik.errors.password ? <div className='form-error'>{formik.errors.password}</div> : ''}
+          {formik.touched.password && formik.errors.password ? (
+            <div className='form-error'>{formik.errors.password}</div>
+          ) : (
+            ''
+          )}
         </div>
         <div className='form-buttons'>
-          <Button name='Регистрация' className='btn btn-dark' type='submit' disabled={stateButton}/>
+          <Button name='Регистрация' className='btn btn-dark' type='submit' disabled={stateButton} />
           <a href='/' onClick={handlerSelectRegistration}>
             Войти
           </a>

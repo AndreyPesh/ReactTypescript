@@ -11,7 +11,11 @@ const Auth: React.FC = () => {
   };
 
   const activeForm =
-    mode === TypeForm.Authorization ? <Authorization onSelectForm={handlerSelectForm} /> : <Registration onSelectForm={handlerSelectForm} />;
+    mode === TypeForm.Authorization ? (
+      <Authorization onSelectForm={handlerSelectForm} />
+    ) : (
+      <Registration onSelectForm={handlerSelectForm} />
+    );
 
   return <>{activeForm}</>;
 };

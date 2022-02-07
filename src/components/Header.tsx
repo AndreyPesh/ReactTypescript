@@ -1,12 +1,25 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { listRoutes } from '../routes/routes';
+import Logout from '../components/Logout';
 import { toggleActiveClassName } from '../utils/functions/toggleActiveClass';
+import { useSelector } from 'react-redux';
+import { RootState } from '../redux/store';
 
 const Header: React.FC = () => {
+  const {
+    userStatus: { name, isAuth },
+  } = useSelector((state: RootState) => state);
   const linkList = listRoutes.map((routeData) => {
     if (routeData.hideInListNav) {
       return;
+    }
+    if (routeData.isGuest && isAuth) {
+      return (
+        <li key={routeData.route}>
+          <Logout />
+        </li>
+      );
     }
     return (
       <li key={routeData.route}>
@@ -18,6 +31,7 @@ const Header: React.FC = () => {
   });
   return (
     <header>
+      <span>{name}</span>
       <nav>
         <ul className='nav-links'>{linkList}</ul>
       </nav>

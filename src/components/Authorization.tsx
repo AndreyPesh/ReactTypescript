@@ -18,7 +18,7 @@ const Authorization: React.FC<{ onSelectForm: HandlerSelectForm }> = (props) => 
       setStateButton(true);
       setTimeout(() => {
         setStateButton(false);
-        const {email, password} = values;
+        const { email, password } = values;
         console.log(email, password);
       }, 3000);
     },
@@ -48,21 +48,25 @@ const Authorization: React.FC<{ onSelectForm: HandlerSelectForm }> = (props) => 
         </div>
         <div className='form-group'>
           <label htmlFor='password-auth'>Пароль</label>
-          <input 
+          <input
             type='password'
             name='password'
             className='form-control'
             id='password-auth'
             autoComplete='on'
             placeholder='Введите пароль'
-            value = {formik.values.password}
-            onChange = {formik.handleChange}
-            onBlur = {formik.handleBlur}
+            value={formik.values.password}
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
           />
-          {formik.touched.password && formik.errors.password ? <div className='form-error'>{formik.errors.password}</div> : ''}
+          {formik.touched.password && formik.errors.password ? (
+            <div className='form-error'>{formik.errors.password}</div>
+          ) : (
+            ''
+          )}
         </div>
         <div className='form-buttons'>
-          <Button name='Войти' className='btn btn-primary' type='submit' disabled={stateButton}/>
+          <Button name='Войти' className='btn btn-primary' type='submit' disabled={stateButton} />
           <a href='/' onClick={handlerSelectRegistration}>
             Регистрация
           </a>

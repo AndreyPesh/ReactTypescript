@@ -1,18 +1,11 @@
-import { TypeActionCreateUser, userData } from '../actions/usersCreator';
-import { CREATE_USER } from '../constants';
+import { TypeActionCreateUser } from '../types/types';
+import { CREATE_USER, DEFAULT_STATUS_USER_DATA } from '../constants';
 
-
-const defaultStateUserData: userData = {
-  message: '',
-  token: '',
-  refreshToken: '',
-  userId: '',
-  name: ''
-}
-
-export default function usersReducer(state = defaultStateUserData, action: TypeActionCreateUser) {
-  switch(action.type) {
-    case CREATE_USER: return {...state, ...action.payload}
-    default: return state;
+export default function usersReducer(state = DEFAULT_STATUS_USER_DATA, action: TypeActionCreateUser) {
+  switch (action.type) {
+    case CREATE_USER:
+      return { ...state, ...action.payload };
+    default:
+      return state;
   }
 }
